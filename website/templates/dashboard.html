@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+<div class="container mt-5">
+
+
+<h1 class="text-center mb-5">
+    Admin Dashboard
+</h1>
+
+
+
+<div class="row g-4">
+
+
+
+<div class="col-md-3">
+
+<div class="card shadow p-3 text-center">
+
+<h3>
+{{ news_count }}
+</h3>
+
+<p>
+News Articles
+</p>
+
+
+<a href="/admin/website/news/"
+class="btn btn-primary">
+Manage
+</a>
+
+
+</div>
+
+</div>
+
+
+
+
+
+<div class="col-md-3">
+
+<div class="card shadow p-3 text-center">
+
+<h3>
+{{ volunteer_count }}
+</h3>
+
+<p>
+Volunteers
+</p>
+
+
+<a href="/admin/website/volunteer/"
+class="btn btn-success">
+
+Manage
+
+</a>
+
+
+</div>
+
+</div>
+
+
+
+
+
+
+<div class="col-md-3">
+
+<div class="card shadow p-3 text-center">
+
+<h3>
+{{ manifesto_count }}
+</h3>
+
+<p>
+Manifesto Items
+</p>
+
+
+<a href="{% url 'manifesto' %}"
+class="btn btn-warning">
+
+Edit
+
+</a>
+
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+<div class="col-md-3">
+
+<div class="card shadow p-3 text-center">
+
+
+<h3>
+{{ contact_count }}
+</h3>
+
+
+<p>
+Messages
+</p>
+
+
+
+<a href="/admin/website/contact/"
+class="btn btn-danger">
+
+View
+
+</a>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+{% endblock %}

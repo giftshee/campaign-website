@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- HERO IMAGE SECTION -->
+<div class="position-relative">
+
+    {% if item.image %}
+    <img src="{{ item.image.url }}"
+         class="w-100"
+         style="height:60vh; object-fit:cover;">
+    {% else %}
+    <div style="height:60vh; background:#0d6efd;"></div>
+    {% endif %}
+
+    <!-- DARK OVERLAY -->
+    <div class="position-absolute top-0 start-0 w-100 h-100"
+         style="background:rgba(0,0,0,0.4);"></div>
+
+    <!-- TITLE OVER IMAGE -->
+    <div class="position-absolute top-50 start-50 translate-middle text-center text-white px-3">
+
+        <h1 class="fw-bold display-5">
+            {{ item.title }}
+        </h1>
+
+        <p class="mt-2 opacity-75">
+            {{ item.date|date:"F d, Y" }}
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- CONTENT SECTION -->
+<div class="container mt-5" style="max-width:850px;">
+
+    <div class="p-4 p-md-5 bg-white shadow-sm rounded-4" style="margin-top:-80px; position:relative;">
+
+        <!-- CONTENT TEXT -->
+        <p class="fs-5 lh-lg text-dark">
+            {{ item.content }}
+        </p>
+
+        <!-- ACTION BUTTONS -->
+        <div class="d-flex flex-wrap gap-2 mt-4">
+
+            <a href="/" class="btn btn-outline-secondary rounded-pill">
+                ← Back Home
+            </a>
+
+            <a href="{% url 'news_list' %}" class="btn btn-primary rounded-pill">
+                📰 More News
+            </a>
+
+            <a href="https://wa.me/25400670908?text=I%20just%20read%20your%20update"
+               class="btn btn-success rounded-pill"
+               target="_blank">
+                💬 Share on WhatsApp
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

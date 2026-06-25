@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+
+.hero {
+    padding: 70px;
+    text-align: center;
+    color: white;
+    background: linear-gradient(135deg, #0d6efd, #198754);
+}
+
+.container-box {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* FORM */
+.form-box {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+/* ================= SLIDER ================= */
+.slider-wrapper {
+    overflow: hidden;
+    width: 100%;
+    padding: 30px 0;
+}
+
+.slider-track {
+    display: flex;
+    gap: 20px;
+    width: max-content;
+    animation: scrollLeft 60s linear infinite;
+}
+
+/* IMAGE CARD */
+.slide-item {
+    flex: 0 0 auto;
+    width: 300px;
+    height: 220px;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.slide-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ACTION BUTTONS */
+.actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 5px;
+    z-index: 2;
+}
+
+.actions button {
+    border: none;
+    padding: 5px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.edit-btn { background: #ffc107; }
+.delete-btn { background: #dc3545; color: white; }
+
+/* ANIMATION */
+@keyframes scrollLeft {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* pause on hover */
+.slider-wrapper:hover .slider-track {
+    animation-play-state: paused;
+}
+
+</style>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>Campaign Gallery</h1>
+    <p>Photos from events and community visits</p>
+</div>
+
+<div class="container-box">
+
+    <!-- ================= ADD FORM ================= -->
+    {% if user.is_staff %}
+    <div class="form-box">
+
+        <h4>Add New Image</h4>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button class="btn btn-primary w-100">
+                Upload Image
+            </button>
+        </form>
+
+    </div>
+    {% endif %}
+
+    <!-- ================= SLIDING GALLERY ================= -->
+    <div class="slider-wrapper">
+
+        <div class="slider-track">
+
+            {% for img in images %}
+
+            <div class="slide-item">
+
+                <img src="{{ img.image.url }}" alt="{{ img.title }}">
+
+                {% if user.is_staff %}
+                <div class="actions">
+
+                    <button class="edit-btn"
+                            onclick="fillEdit('{{ img.id }}', '{{ img.title }}')">
+                        Edit
+                    </button>
+
+                    <form method="POST"
+                          action="{% url 'delete_gallery' img.id %}"
+                          onsubmit="return confirm('Delete this image?')">
+                        {% csrf_token %}
+                        <button class="delete-btn">X</button>
+                    </form>
+
+                </div>
+                {% endif %}
+
+            </div>
+
+            {% endfor %}
+
+            <!-- duplicate for smooth infinite loop -->
+            {% for img in images %}
+
+            <div class="slide-item">
+                <img src="{{ img.image.url }}" alt="{{ img.title }}">
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    <!-- ================= EDIT FORM ================= -->
+    {% if user.is_staff %}
+    <div class="form-box mt-4" id="editBox" style="display:none;">
+
+        <h4>Edit Image</h4>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <input type="hidden" name="edit_id" id="edit_id">
+
+            <label>Title</label>
+            <input type="text" name="title" id="edit_title" class="form-control">
+
+            <label class="mt-2">Change Image (optional)</label>
+            <input type="file" name="image" class="form-control">
+
+            <button class="btn btn-success mt-3 w-100">
+                Save Changes
+            </button>
+        </form>
+
+    </div>
+    {% endif %}
+
+</div>
+
+<!-- ================= JS ================= -->
+<script>
+function fillEdit(id, title) {
+    document.getElementById("editBox").style.display = "block";
+    document.getElementById("edit_id").value = id;
+    document.getElementById("edit_title").value = title;
+}
+</script>
+
+{% endblock %}

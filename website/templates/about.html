@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- HERO SECTION -->
+<div class="py-5 text-center text-white"
+     style="background: linear-gradient(135deg, #0d6efd, #198754);">
+
+    <div class="container">
+
+        <h1 class="display-4 fw-bold">About the Campaign</h1>
+
+        <p class="lead mt-3">
+            A people-driven movement focused on transparency, development, and real leadership.
+        </p>
+
+    </div>
+</div>
+
+<!-- MAIN SECTION -->
+<div class="container my-5">
+
+    <div class="row align-items-center g-5">
+
+        <!-- IMAGE -->
+        <div class="col-md-6 text-center position-relative">
+
+            <!-- glow -->
+            <div style="
+                position:absolute;
+                width:300px;
+                height:300px;
+                background:rgba(13,110,253,0.15);
+                border-radius:50%;
+                top:50%;
+                left:50%;
+                transform:translate(-50%, -50%);
+                z-index:0;
+            "></div>
+
+            {% if about.image %}
+                <img src="{{ about.image.url }}"
+                     class="img-fluid rounded-circle shadow-lg position-relative"
+                     style="width:330px;height:330px;object-fit:cover;border:6px solid #0d6efd;z-index:1;">
+            {% else %}
+                <img src="https://via.placeholder.com/330"
+                     class="img-fluid rounded-circle shadow-lg position-relative"
+                     style="width:330px;height:330px;object-fit:cover;border:6px solid #0d6efd;z-index:1;">
+            {% endif %}
+
+            <div class="badge bg-primary px-3 py-2 shadow"
+                 style="position:absolute; bottom:20px; right:20px;">
+                Verified Candidate
+            </div>
+
+        </div>
+
+        <!-- TEXT -->
+        <div class="col-md-6">
+
+            <h2 class="fw-bold">
+                {{ about.title|default:"Committed to Real Change" }}
+            </h2>
+
+            <p class="text-muted mt-3 fs-5">
+                {{ about.content|default:"This campaign is built on transparency, accountability, and empowering citizens through action, not promises." }}
+            </p>
+
+            <!-- HIGHLIGHTS -->
+            <div class="mt-4">
+
+                <div class="d-flex mb-2">
+                    <span class="me-2 text-success">✔</span>
+                    <span>Transparent leadership & accountability</span>
+                </div>
+
+                <div class="d-flex mb-2">
+                    <span class="me-2 text-success">✔</span>
+                    <span>Youth empowerment & job creation</span>
+                </div>
+
+                <div class="d-flex mb-2">
+                    <span class="me-2 text-success">✔</span>
+                    <span>Education & healthcare improvement</span>
+                </div>
+
+                <div class="d-flex mb-2">
+                    <span class="me-2 text-success">✔</span>
+                    <span>Community-driven development</span>
+                </div>
+
+            </div>
+
+            <!-- CTA -->
+            <div class="mt-4 d-flex gap-3 flex-wrap">
+
+                <a href="{% url 'volunteer' %}"
+                   class="btn btn-primary btn-lg rounded-pill px-4">
+                    Join the Movement
+                </a>
+
+                <a href="https://wa.me/25400670908"
+                   class="btn btn-outline-primary btn-lg rounded-pill px-4">
+                    Contact Support
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- EXTRA IMPACT SECTION -->
+<div class="container my-5 text-center">
+
+    <h3 class="fw-bold mb-3">Why This Movement Matters</h3>
+
+    <p class="text-muted mx-auto" style="max-width:750px;">
+        We believe in leadership that listens, acts, and delivers real results for every citizen.
+        This is not politics as usual — it is people-first leadership.
+    </p>
+
+</div>
+
+{% endblock %}

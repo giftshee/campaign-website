@@ -1,0 +1,141 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+
+<style>
+    body {
+        background: #f4f6f9;
+    }
+
+    /* ===== TOP TITLE ===== */
+    .page-title {
+        font-size: 26px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #111827;
+    }
+
+    /* ===== STAT CARDS ===== */
+    .stat-card {
+        border: none;
+        border-radius: 16px;
+        padding: 20px;
+        transition: 0.3s;
+        background: white;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    }
+
+    .stat-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+    }
+
+    .stat-icon {
+        font-size: 40px;
+        margin-bottom: 10px;
+    }
+
+    .stat-number {
+        font-size: 28px;
+        font-weight: 700;
+        color: #111827;
+    }
+
+    .stat-label {
+        color: #6b7280;
+        font-size: 14px;
+    }
+
+    /* COLORS */
+    .blue { color: #2563eb; }
+    .green { color: #10b981; }
+    .yellow { color: #f59e0b; }
+    .red { color: #ef4444; }
+
+    /* CHART BOX */
+    .chart-box {
+        margin-top: 25px;
+        background: white;
+        padding: 25px;
+        border-radius: 16px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    }
+</style>
+
+<div class="container-fluid">
+
+    <div class="page-title">
+        📊 Dashboard Overview
+    </div>
+
+    <!-- ===== STATS ===== -->
+    <div class="row g-4">
+
+        <div class="col-md-3">
+            <div class="stat-card text-center">
+                <div class="stat-icon blue">👥</div>
+                <div class="stat-number">{{ volunteers }}</div>
+                <div class="stat-label">Volunteers</div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="stat-card text-center">
+                <div class="stat-icon green">📰</div>
+                <div class="stat-number">{{ news }}</div>
+                <div class="stat-label">News Articles</div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="stat-card text-center">
+                <div class="stat-icon yellow">💬</div>
+                <div class="stat-number">{{ messages }}</div>
+                <div class="stat-label">Messages</div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="stat-card text-center">
+                <div class="stat-icon red">📄</div>
+                <div class="stat-number">{{ manifesto }}</div>
+                <div class="stat-label">Manifesto Items</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ===== CHART ===== -->
+    <div class="chart-box mt-4">
+        <h5 class="mb-3">📈 Website Activity</h5>
+        <canvas id="chart"></canvas>
+    </div>
+
+</div>
+
+<!-- CHART JS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const ctx = document.getElementById('chart');
+
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['News', 'Volunteers', 'Messages', 'Manifesto'],
+        datasets: [{
+            label: 'Total Activity',
+            data: [
+                {{ news }},
+                {{ volunteers }},
+                {{ messages }},
+                {{ manifesto }}
+            ],
+            backgroundColor: ['#2563eb', '#10b981', '#f59e0b', '#ef4444'],
+            borderRadius: 10
+        }]
+    }
+});
+</script>
+
+{% endblock %}

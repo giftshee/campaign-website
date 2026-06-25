@@ -1,0 +1,231 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+    /* ===== HERO ===== */
+    .hero {
+        padding: 80px 20px;
+        text-align: center;
+        color: white;
+        background: linear-gradient(135deg, #198754, #0d6efd);
+    }
+
+    .hero h1 {
+        font-weight: 800;
+        font-size: 3rem;
+    }
+
+    /* ===== CARDS ===== */
+    .manifesto-card {
+        border: none;
+        border-radius: 18px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        transition: 0.3s;
+        height: 100%;
+    }
+
+    .manifesto-card:hover {
+        transform: translateY(-8px);
+    }
+
+    .icon {
+        font-size: 42px;
+    }
+
+    /* ===== VIDEO CARDS ===== */
+    .video-card {
+        border: none;
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        transition: 0.3s;
+    }
+
+    .video-card:hover {
+        transform: scale(1.02);
+    }
+
+    /* ===== CTA ===== */
+    .cta {
+        background: linear-gradient(135deg, #0d6efd, #198754);
+        color: white;
+        padding: 60px 20px;
+        border-radius: 20px;
+    }
+</style>
+
+<!-- ================= HERO ================= -->
+<div class="hero">
+
+    <h1>Our Manifesto</h1>
+
+    <p class="lead mt-3">
+        A commitment to transparency, development, and real action for the people.
+    </p>
+
+</div>
+
+<!-- ================= INTRO ================= -->
+<div class="container my-5 text-center">
+
+    <p class="text-muted fs-5 mx-auto" style="max-width:800px;">
+        This manifesto outlines our vision for a better future — focusing on education,
+        jobs, healthcare, infrastructure, and accountable leadership.
+    </p>
+
+</div>
+
+<!-- ================= MANIFESTO POINTS ================= -->
+<div class="container my-5">
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+            <div class="card manifesto-card p-4 text-center">
+                <div class="icon">📚</div>
+                <h4 class="mt-3">Education Reform</h4>
+                <p class="text-muted">Improve schools, support teachers, and expand access to quality learning.</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card manifesto-card p-4 text-center">
+                <div class="icon">💼</div>
+                <h4 class="mt-3">Job Creation</h4>
+                <p class="text-muted">Empower youth through skills training, entrepreneurship, and opportunities.</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card manifesto-card p-4 text-center">
+                <div class="icon">🏥</div>
+                <h4 class="mt-3">Healthcare</h4>
+                <p class="text-muted">Affordable and accessible healthcare for all citizens.</p>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card manifesto-card p-4 text-center">
+                <div class="icon">🚰</div>
+                <h4 class="mt-3">Clean Water</h4>
+                <p class="text-muted">Ensure every community has access to safe and clean water.</p>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card manifesto-card p-4 text-center">
+                <div class="icon">⚖️</div>
+                <h4 class="mt-3">Good Governance</h4>
+                <p class="text-muted">Transparent leadership with zero corruption.</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% if user.is_staff %}
+
+<div class="container my-4">
+
+    <div class="card p-4 shadow-lg">
+
+        <h4>📤 Upload Manifesto Video</h4>
+        <p class="text-muted">Add a new campaign video or YouTube link.</p>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button class="btn btn-primary w-100 mt-2">
+                Publish Update
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endif %}
+
+<!-- ================= VIDEO SECTION (FIXED PROPERLY) ================= -->
+<div class="container my-5">
+
+    <div class="text-center mb-4">
+        <h2 class="fw-bold">Campaign Videos</h2>
+        <p class="text-muted">
+            Watch real activities, community visits, and development projects in action.
+        </p>
+    </div>
+
+    <div class="row g-4">
+
+        {% for post in posts %}
+
+        <div class="col-md-6">
+            <div class="card video-card">
+
+                {% if post.video %}
+                    <div class="ratio ratio-16x9">
+                        <video controls>
+                            <source src="{{ post.video.url }}">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+
+                {% elif post.youtube_link %}
+                    <div class="ratio ratio-16x9">
+                        <iframe src="{{ post.youtube_link }}"
+                                title="{{ post.title }}"
+                                allowfullscreen></iframe>
+                    </div>
+                {% endif %}
+
+                <div class="p-3">
+                    <h5 class="fw-bold">{{ post.title }}</h5>
+                    <p class="text-muted">{{ post.description }}</p>
+                </div>
+
+            </div>
+        </div>
+
+        {% empty %}
+            <p class="text-center text-muted">No videos uploaded yet.</p>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+<!-- ================= CTA ================= -->
+<div class="container my-5">
+
+    <div class="cta text-center">
+
+        <h2 class="fw-bold">Support This Vision</h2>
+
+        <p class="lead">
+            Join us in building a better, transparent, and developed society.
+        </p>
+
+        <a href="{% url 'volunteer' %}" class="btn btn-light btn-lg rounded-pill px-4 mt-3">
+            Become a Volunteer
+        </a>
+
+    </div>
+
+</div>
+
+<!-- ================= ADMIN ================= -->
+<div class="text-center mb-5">
+
+    {% if user.is_staff %}
+        <a href="{% url 'edit_page' 'manifesto' %}" class="btn btn-warning btn-lg">
+            ✏️ Edit Manifesto
+        </a>
+    {% endif %}
+
+</div>
+
+{% endblock %}
