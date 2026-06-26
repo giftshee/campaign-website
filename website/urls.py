@@ -21,11 +21,7 @@ urlpatterns = [
     views.volunteer_dashboard,
     name='volunteer_dashboard'
 ),
-    path(
-'create-admin/',
-views.create_admin,
-name="create_admin"
-),
+
 
     path('volunteer/', views.volunteer, name='volunteer'),
 
