@@ -473,6 +473,7 @@ def logout_view(request):
     logout(request)
     return redirect("home")
 from django.contrib.auth.models import User
+from django.http import HttpResponse
 
 
 def create_admin(request):
@@ -482,7 +483,9 @@ def create_admin(request):
         User.objects.create_superuser(
             username="admin",
             email="admin@gmail.com",
-            password="YourPasswordHere"
+            password="admin12345"
         )
 
-    return HttpResponse("Admin created")
+        return HttpResponse("Admin created successfully")
+
+    return HttpResponse("Admin already exists")
