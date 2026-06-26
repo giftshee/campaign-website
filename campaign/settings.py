@@ -24,6 +24,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary',
+'cloudinary_storage',
     'website',
 ]
 
@@ -116,3 +118,6 @@ LOGIN_URL = '/admin/login/'
 
 # ================= DEFAULT AUTO FIELD =================
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_FILE_STORAGE = (
+    'cloudinary_storage.storage.MediaCloudinaryStorage'
+)

@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import authenticate, login, logout
 from .models import Gallery
-
+from django.http import HttpResponse
 from .models import (
     News,
     Volunteer,
@@ -472,3 +472,17 @@ from django.shortcuts import redirect
 def logout_view(request):
     logout(request)
     return redirect("home")
+from django.contrib.auth.models import User
+
+
+def create_admin(request):
+
+    if not User.objects.filter(username="admin").exists():
+
+        User.objects.create_superuser(
+            username="admin",
+            email="admin@gmail.com",
+            password="YourPasswordHere"
+        )
+
+    return HttpResponse("Admin created")
