@@ -29,10 +29,19 @@ def admin_only(user):
 # ================= HOME =================
 
 def home(request):
+
+    home_page, created = PageContent.objects.get_or_create(
+        name="home",
+        defaults={
+            "title": "Welcome to our Campaign",
+            "content": "Building a better future together."
+        }
+    )
+
     news = News.objects.all().order_by('-date')[:3]
+
     volunteers_count = Volunteer.objects.count()
 
-    home_page = get_object_or_404(PageContent, name="home")
 
     return render(request, "home.html", {
         "news": news,
@@ -57,8 +66,18 @@ def delete_home_image(request):
 # ================= ABOUT =================
 
 def about(request):
-    about_page = get_object_or_404(PageContent, name="about")
-    return render(request, "about.html", {"about": about_page})
+
+    about_page, created = PageContent.objects.get_or_create(
+        name="about",
+        defaults={
+            "title": "About Our Campaign",
+            "content": "Our vision and mission."
+        }
+    )
+
+    return render(request, "about.html", {
+        "about": about_page
+    })
 
 
 # ================= NEWS =================
