@@ -108,9 +108,7 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
-# ================= MEDIA FILES =================
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+
 
 
 # ================= LOGIN =================
@@ -122,7 +120,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 import cloudinary
 
 cloudinary.config(
-    cloud_name=os.environ.get("CLOUDINARY_CLOUD_NAME"),
-    api_key=os.environ.get("CLOUDINARY_API_KEY"),
-    api_secret=os.environ.get("CLOUDINARY_API_SECRET")
+    cloud_name=os.environ.get("Root"),
+    api_key=os.environ.get("647537626768746"),
+    api_secret=os.environ.get("CMrwLDHRybRAwgHXvg-5tBbRnrc")
 )
