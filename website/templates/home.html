@@ -4,11 +4,15 @@
 
 
 <!-- HERO SECTION -->
+
 <div class="hero d-flex align-items-center"
+
 style="
+
 min-height:85vh;
 
 background:
+
 linear-gradient(
 rgba(13,110,253,0.85),
 rgba(10,88,202,0.95)
@@ -19,55 +23,61 @@ url('{% if home.background_image %}{{ home.background_image.url }}{% else %}http
 center/cover no-repeat;
 
 color:white;
+
 ">
 
 
 <div class="container">
 
+
 <div class="row align-items-center">
 
 
-<div class="col-md-5 text-center mb-4 mb-md-0">
+<!-- IMAGE -->
+
+<div class="col-lg-5 col-md-6 text-center mb-4">
 
 
 {% if home.image %}
 
-<div class="position-relative d-inline-block">
 
 <img src="{{ home.image.url }}"
-class="rounded-circle shadow-lg"
-style="width:340px;height:340px;object-fit:cover;border:6px solid white;">
 
+class="rounded-circle shadow-lg img-fluid"
 
-<span class="position-absolute bottom-0 start-50 translate-middle-x 
-bg-success text-white px-3 py-1 rounded-pill shadow">
+style="
 
-Campaign Leader
+max-width:340px;
 
-</span>
+width:100%;
 
+border:6px solid white;
 
-</div>
+">
 
 
 {% else %}
 
 
 <img src="https://via.placeholder.com/340"
-class="rounded-circle shadow-lg"
-style="width:340px;height:340px;object-fit:cover;border:6px solid white;">
+
+class="rounded-circle img-fluid">
 
 
 {% endif %}
+
 
 
 </div>
 
 
 
+
+
 <!-- TEXT -->
 
-<div class="col-md-7 text-center text-md-start">
+
+<div class="col-lg-7 col-md-6 text-center text-md-start">
 
 
 <h1 class="display-3 fw-bold">
@@ -78,19 +88,22 @@ style="width:340px;height:340px;object-fit:cover;border:6px solid white;">
 
 
 
-<p class="lead mt-3" style="font-size:1.3rem;">
+<p class="lead mt-3">
 
-{{ home.content|default:"Leadership focused on transparency, opportunity, and real development for every citizen." }}
+{{ home.content|default:"Leadership focused on transparency, opportunity, and development." }}
 
 </p>
 
 
 
-<div class="mt-4 d-flex flex-wrap gap-2 justify-content-center justify-content-md-start">
+
+
+<div class="d-flex flex-wrap gap-3 mt-4 justify-content-center justify-content-md-start">
 
 
 <a href="{% url 'volunteer' %}"
-class="btn btn-light btn-lg rounded-pill px-4">
+
+class="btn btn-light btn-lg rounded-pill">
 
 🚀 Join Movement
 
@@ -98,8 +111,9 @@ class="btn btn-light btn-lg rounded-pill px-4">
 
 
 
-<a href="https://wa.me/25400670908?text=I%20support%20your%20campaign"
-class="btn btn-outline-light btn-lg rounded-pill px-4">
+<a href="https://wa.me/25400670908"
+
+class="btn btn-outline-light btn-lg rounded-pill">
 
 💬 WhatsApp
 
@@ -107,8 +121,10 @@ class="btn btn-outline-light btn-lg rounded-pill px-4">
 
 
 
+
 <a href="#news"
-class="btn btn-warning btn-lg rounded-pill px-4">
+
+class="btn btn-warning btn-lg rounded-pill">
 
 📰 Updates
 
@@ -122,6 +138,8 @@ class="btn btn-warning btn-lg rounded-pill px-4">
 
 
 
+
+
 {% if request.user.is_superuser %}
 
 
@@ -129,6 +147,7 @@ class="btn btn-warning btn-lg rounded-pill px-4">
 
 
 <a href="{% url 'edit_page' 'home' %}"
+
 class="btn btn-warning">
 
 ✏️ Edit Home Page
@@ -137,24 +156,18 @@ class="btn btn-warning">
 
 
 
-<a href="{% url 'edit_page' 'home' %}"
-class="btn btn-success btn-sm me-2">
-
-🖼 Change Image
-
-</a>
-
-
 
 <form action="{% url 'delete_home_image' %}"
+
 method="POST"
-style="display:inline;">
+
+class="d-inline">
 
 
 {% csrf_token %}
 
 
-<button class="btn btn-danger btn-sm">
+<button class="btn btn-danger">
 
 🗑 Remove Image
 
@@ -174,300 +187,383 @@ style="display:inline;">
 
 </div>
 
-</div>
 
 </div>
 
-</div>
-
 
 </div>
 
-</div>
 
 </div>
-</div>
-<!-- LIVE STATS SECTION -->
+
+
+
+
+
+
+<!-- STATS -->
+
+
 <div class="container mt-5">
 
-    <div class="text-center mb-5">
-        <h2 class="fw-bold">Our Impact So Far</h2>
-        <p class="text-muted">
-            Real progress driven by community participation and shared vision.
-        </p>
-    </div>
 
-    <div class="row g-4">
+<div class="row g-4">
 
-        <!-- Volunteers -->
-        <div class="col-md-3">
-            <div class="card border-0 shadow-lg text-center p-4 rounded-4 h-100"
-                 style="background: linear-gradient(135deg, #0d6efd, #6ea8fe); color:white;">
 
-                <div style="font-size:40px;">👥</div>
+<div class="col-12 col-md-6 col-lg-3">
 
-                <h1 class="fw-bold counter" data-target="{{ volunteers_count }}">0</h1>
-                <p class="mb-0">Volunteers</p>
+<div class="card text-center shadow p-4 h-100">
 
-            </div>
-        </div>
 
-        <!-- Projects -->
-        <div class="col-md-3">
-            <div class="card border-0 shadow-lg text-center p-4 rounded-4 h-100"
-                 style="background: linear-gradient(135deg, #198754, #20c997); color:white;">
+<h1 class="counter"
 
-                <div style="font-size:40px;">🏗</div>
+data-target="{{ volunteers_count }}">
 
-                <h1 class="fw-bold counter" data-target="48">0</h1>
-                <p class="mb-0">Projects Supported</p>
+0
 
-            </div>
-        </div>
+</h1>
 
-        <!-- Communities -->
-        <div class="col-md-3">
-            <div class="card border-0 shadow-lg text-center p-4 rounded-4 h-100"
-                 style="background: linear-gradient(135deg, #fd7e14, #ffb74d); color:white;">
 
-                <div style="font-size:40px;">🌍</div>
+<p>Volunteers</p>
 
-                <h1 class="fw-bold counter" data-target="32">0</h1>
-                <p class="mb-0">Communities Reached</p>
 
-            </div>
-        </div>
-
-        <!-- Approval -->
-        <div class="col-md-3">
-            <div class="card border-0 shadow-lg text-center p-4 rounded-4 h-100"
-                 style="background: linear-gradient(135deg, #6f42c1, #b197fc); color:white;">
-
-                <div style="font-size:40px;">📈</div>
-
-                <h1 class="fw-bold counter" data-target="98">0</h1>
-                <p class="mb-0">% Approval Growth</p>
-
-            </div>
-        </div>
-
-    </div>
 </div>
-<!-- WHY SUPPORT US SECTION -->
+
+</div>
+
+
+
+
+
+<div class="col-12 col-md-6 col-lg-3">
+
+<div class="card text-center shadow p-4 h-100">
+
+<h1 class="counter" data-target="48">
+
+0
+
+</h1>
+
+
+<p>Projects Supported</p>
+
+
+</div>
+
+</div>
+
+
+
+
+
+<div class="col-12 col-md-6 col-lg-3">
+
+<div class="card text-center shadow p-4 h-100">
+
+
+<h1 class="counter" data-target="32">
+
+0
+
+</h1>
+
+
+<p>Communities</p>
+
+
+</div>
+
+</div>
+
+
+
+
+
+
+<div class="col-12 col-md-6 col-lg-3">
+
+<div class="card text-center shadow p-4 h-100">
+
+
+<h1 class="counter" data-target="98">
+
+0
+
+</h1>
+
+
+<p>Approval Growth</p>
+
+
+</div>
+
+</div>
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- FEATURES -->
+
+
 <div class="container mt-5">
 
-    <div class="text-center mb-5">
-        <h2 class="fw-bold">Why Support This Movement?</h2>
-        <p class="text-muted">
-            A leadership built on trust, action, and real change for the people.
-        </p>
-    </div>
 
-    <div class="row g-4">
+<h2 class="text-center fw-bold mb-4">
 
-        <!-- Transparency -->
-        <div class="col-md-4">
-            <div class="card border-0 shadow-lg h-100 p-4 text-center rounded-4">
+Key Focus Areas
 
-                <div style="font-size:45px;">🔍</div>
+</h2>
 
-                <h4 class="fw-bold mt-3">Transparency</h4>
 
-                <p class="text-muted">
-                    We believe in open leadership where every decision is accountable to the people.
-                </p>
 
-            </div>
-        </div>
+<div class="row g-4">
 
-        <!-- People First -->
-        <div class="col-md-4">
-            <div class="card border-0 shadow-lg h-100 p-4 text-center rounded-4">
 
-                <div style="font-size:45px;">🤝</div>
+<div class="col-md-4">
 
-                <h4 class="fw-bold mt-3">People First</h4>
 
-                <p class="text-muted">
-                    Every policy is designed to improve education, jobs, healthcare, and livelihoods.
-                </p>
+<div class="card shadow text-center p-4 h-100">
 
-            </div>
-        </div>
 
-        <!-- Real Action -->
-        <div class="col-md-4">
-            <div class="card border-0 shadow-lg h-100 p-4 text-center rounded-4">
+<h2>📚</h2>
 
-                <div style="font-size:45px;">⚡</div>
+<h4>Education</h4>
 
-                <h4 class="fw-bold mt-3">Real Action</h4>
 
-                <p class="text-muted">
-                    Not promises — we deliver measurable community development projects.
-                </p>
+<p>
 
-            </div>
-        </div>
+Better schools and opportunities for youth.
 
-    </div>
-</div>
-
-<!-- FEATURES SECTION -->
-<div class="container mt-5">
-
-    <div class="text-center mb-5">
-        <h2 class="fw-bold">Key Focus Areas</h2>
-        <p class="text-muted">Our priority is improving everyday life for citizens.</p>
-    </div>
-
-    <div class="row g-4 text-center">
-
-        <div class="col-md-4">
-            <div class="card border-0 shadow-sm p-4 h-100 rounded-4">
-
-                <div style="font-size:40px;">📚</div>
-                <h4 class="mt-3">Education</h4>
-                <p class="text-muted">Better schools, better future for our youth.</p>
-
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card border-0 shadow-sm p-4 h-100 rounded-4">
-
-                <div style="font-size:40px;">💼</div>
-                <h4 class="mt-3">Jobs</h4>
-                <p class="text-muted">Creating opportunities for every citizen.</p>
-
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card border-0 shadow-sm p-4 h-100 rounded-4">
-
-                <div style="font-size:40px;">🏥</div>
-                <h4 class="mt-3">Health</h4>
-                <p class="text-muted">Affordable and accessible healthcare.</p>
-
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<!-- ABOUT PREVIEW -->
-<div class="container mt-5 text-center">
-
-    <h2 class="fw-bold">About the Campaign</h2>
-
-    <p class="text-muted">
-        Learn more about our vision, leadership, and mission for change.
-    </p>
-
-    <a href="{% url 'about' %}" class="btn btn-primary btn-lg rounded-pill">
-        Read Full About Page
-    </a>
-
-</div>
-
-<!-- NEWS SECTION -->
-<div class="mt-5" id="news">
-
-    <h2 class="text-center mb-4">Latest Campaign News</h2>
-
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-
-        {% for item in news %}
-
-        <div class="col">
-            <div class="card h-100 shadow-sm border-0">
-
-                {% if item.image %}
-                <img src="{{ item.image.url }}" class="card-img-top"
-                     style="height:220px; object-fit:cover;">
-                {% endif %}
-
-                <div class="card-body">
-                    <h5 class="card-title">{{ item.title }}</h5>
-
-                    <p class="text-muted small">
-                        {{ item.date|date:"F d, Y" }}
-                    </p>
-
-                    <p class="card-text">
-                        {{ item.content|truncatechars:120 }}
-                    </p>
-
-                    <a href="{% url 'news_detail' item.id %}" class="btn btn-primary btn-sm">
-                        Read More →
-                    </a>
-
-                    <!-- ADMIN BUTTONS (only superuser) -->
-                    {% if request.user.is_superuser %}
-                    <div class="mt-2">
-
-                        <a href="{% url 'edit_news' item.id %}" class="btn btn-warning btn-sm">
-                            Edit
-                        </a>
-
-                        <form action="{% url 'delete_news' item.id %}" method="POST" style="display:inline;">
-                            {% csrf_token %}
-                            <button class="btn btn-danger btn-sm">
-                                Delete
-                            </button>
-                        </form>
-
-                    </div>
-                    {% endif %}
-
-                </div>
-
-            </div>
-        </div>
-
-        {% empty %}
-        <div class="col-12 text-center">
-            <p>No news available yet.</p>
-        </div>
-
-        {% endfor %}
-
-    </div>
-</div>
-
-<!-- CALL TO ACTION SECTION -->
-<div class="container mt-5">
-
-    <div class="p-5 text-center text-white rounded shadow"
-         style="background: linear-gradient(to right, #0d6efd, #198754);">
-
-        <h2 class="fw-bold">Join the Movement for Real Change</h2>
-
-        <p class="lead">
-            Be part of the change. Volunteer, support, and help us build a better future together.
-        </p>
-        <p class="lead">
-    Your voice matters. Be part of a movement that puts people first and delivers real development.
 </p>
 
-       <a href="{% url 'volunteer' %}"
-   class="btn btn-light btn-lg me-2"
-   style="transition:0.3s;"
-   onmouseover="this.style.transform='scale(1.05)'"
-   onmouseout="this.style.transform='scale(1)'">
-    Become a Volunteer
-</a>
-
-<a href="https://wa.me/25400670908?text=I%20want%20to%20support%20your%20campaign"
-   class="btn btn-outline-light btn-lg"
-   style="transition:0.3s;"
-   onmouseover="this.style.transform='scale(1.05)'"
-   onmouseout="this.style.transform='scale(1)'">
-    Contact on WhatsApp
-</a>
-
-    </div>
 
 </div>
+
+
+</div>
+
+
+
+
+
+<div class="col-md-4">
+
+
+<div class="card shadow text-center p-4 h-100">
+
+
+<h2>💼</h2>
+
+
+<h4>Jobs</h4>
+
+
+<p>
+
+Creating opportunities and supporting innovation.
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="col-md-4">
+
+
+<div class="card shadow text-center p-4 h-100">
+
+
+<h2>💧</h2>
+
+
+<h4>Water</h4>
+
+
+<p>
+
+Improving access to clean water.
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- NEWS -->
+
+
+
+<div class="container mt-5" id="news">
+
+
+<h2 class="text-center mb-4">
+
+Latest Campaign News
+
+</h2>
+
+
+
+
+<div class="row g-4">
+
+
+{% for item in news %}
+
+
+<div class="col-12 col-md-6 col-lg-4">
+
+
+<div class="card shadow h-100">
+
+
+{% if item.image %}
+
+
+<img src="{{ item.image.url }}"
+
+class="img-fluid"
+
+style="height:230px;object-fit:cover;">
+
+
+{% endif %}
+
+
+
+
+<div class="card-body">
+
+
+<h5>
+
+{{ item.title }}
+
+</h5>
+
+
+
+<p>
+
+{{ item.content|truncatechars:120 }}
+
+</p>
+
+
+
+<a href="{% url 'news_detail' item.id %}"
+
+class="btn btn-primary">
+
+Read More
+
+</a>
+
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+{% endfor %}
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- CTA -->
+
+
+<div class="container mt-5">
+
+
+<div class="p-5 text-center text-white rounded"
+
+style="background:linear-gradient(to right,#0d6efd,#198754);">
+
+
+<h2>
+
+Join The Movement
+
+</h2>
+
+
+<p class="lead">
+
+Your voice matters. Together we build a better future.
+
+</p>
+
+
+
+<a href="{% url 'volunteer' %}"
+
+class="btn btn-light btn-lg">
+
+Become Volunteer
+
+</a>
+
+
+</div>
+
+
+</div>
+
+
+
 {% endblock %}
