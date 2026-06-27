@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils import timezone
 
 
 # =========================
@@ -84,8 +83,15 @@ class PageContent(models.Model):
 
 
     created_at = models.DateTimeField(
-    default=timezone.now
+        auto_now_add=True
+    )
 
+
+    # Homepage background image
+    background_image = models.ImageField(
+        upload_to="backgrounds/",
+        null=True,
+        blank=True
     )
 
 
