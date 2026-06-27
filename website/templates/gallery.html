@@ -41,9 +41,31 @@
 
 /* IMAGE CARD */
 .slide-item {
-    flex: 0 0 auto;
-    width: 300px;
-    height: 220px;
+
+flex:0 0 auto;
+
+width:260px;
+
+height:200px;
+
+border-radius:15px;
+
+overflow:hidden;
+
+}
+
+
+@media(max-width:600px){
+
+.slide-item{
+
+width:200px;
+
+height:160px;
+
+}
+
+
     border-radius: 15px;
     overflow: hidden;
     position: relative;
@@ -128,7 +150,10 @@
 
             <div class="slide-item">
 
-                <img src="{{ img.image.url }}" alt="{{ img.title }}">
+                <img 
+src="{{ img.image.url }}"
+class="img-fluid"
+alt="{{ img.title }}">
 
                 {% if user.is_staff %}
                 <div class="actions">

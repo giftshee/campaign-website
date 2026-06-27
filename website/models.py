@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 # =========================
@@ -52,10 +53,19 @@ class Contact(models.Model):
 # SINGLE PAGE CMS SYSTEM
 # (HOME + ABOUT + OTHER PAGES)
 # =========================
+# =========================
+# PAGE CONTENT CMS
+# =========================
 class PageContent(models.Model):
+
+    PAGE_CHOICES = [
+        ('home', 'Home'),
+        ('about', 'About'),
+    ]
 
     name = models.CharField(
         max_length=50,
+        choices=PAGE_CHOICES,
         unique=True
     )
 
@@ -66,19 +76,16 @@ class PageContent(models.Model):
     content = models.TextField()
 
 
-    # Main page image
     image = models.ImageField(
         upload_to="pages/",
-        null=True,
-        blank=True
+        blank=True,
+        null=True
     )
 
 
-    # Homepage background image
-    background_image = models.ImageField(
-        upload_to="backgrounds/",
-        null=True,
-        blank=True
+    created_at = models.DateTimeField(
+    default=timezone.now
+
     )
 
 
