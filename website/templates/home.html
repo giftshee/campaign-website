@@ -5,91 +5,181 @@
 
 <!-- HERO SECTION -->
 <div class="hero d-flex align-items-center"
-     style="min-height:85vh;
-     background: linear-gradient(rgba(13,110,253,0.85), rgba(10,88,202,0.95)),
-     url('https://images.unsplash.com/photo-1520975916090-3105956dac38') center/cover no-repeat;
-     color:white;">
+style="
+min-height:85vh;
+
+background:
+linear-gradient(
+rgba(13,110,253,0.85),
+rgba(10,88,202,0.95)
+),
+
+url('{% if home.background_image %}{{ home.background_image.url }}{% else %}https://images.unsplash.com/photo-1520975916090-3105956dac38{% endif %}')
+
+center/cover no-repeat;
+
+color:white;
+">
+
 
 <div class="container">
 
 <div class="row align-items-center">
 
+
 <div class="col-md-5 text-center mb-4 mb-md-0">
 
-    {% if home.image %}
-        <div class="position-relative d-inline-block">
 
-            <img src="{{ home.image.url }}"
-                 class="rounded-circle shadow-lg"
-                 style="width:340px;height:340px;object-fit:cover;border:6px solid white;">
+{% if home.image %}
 
-            <span class="position-absolute bottom-0 start-50 translate-middle-x 
-                         bg-success text-white px-3 py-1 rounded-pill shadow">
-                Campaign Leader
-            </span>
+<div class="position-relative d-inline-block">
 
-        </div>
-    {% else %}
-        <img src="https://via.placeholder.com/340"
-             class="rounded-circle shadow-lg"
-             style="width:340px;height:340px;object-fit:cover;border:6px solid white;">
-    {% endif %}
+<img src="{{ home.image.url }}"
+class="rounded-circle shadow-lg"
+style="width:340px;height:340px;object-fit:cover;border:6px solid white;">
+
+
+<span class="position-absolute bottom-0 start-50 translate-middle-x 
+bg-success text-white px-3 py-1 rounded-pill shadow">
+
+Campaign Leader
+
+</span>
+
 
 </div>
 
+
+{% else %}
+
+
+<img src="https://via.placeholder.com/340"
+class="rounded-circle shadow-lg"
+style="width:340px;height:340px;object-fit:cover;border:6px solid white;">
+
+
+{% endif %}
+
+
+</div>
+
+
+
 <!-- TEXT -->
+
 <div class="col-md-7 text-center text-md-start">
 
-    <h1 class="display-3 fw-bold">
-        {{ home.title|default:"Building a Better Future Together" }}
-    </h1>
 
-    <p class="lead mt-3" style="font-size:1.3rem;">
-        {{ home.content|default:"Leadership focused on transparency, opportunity, and real development for every citizen." }}
-    </p>
+<h1 class="display-3 fw-bold">
 
-    <div class="mt-4 d-flex flex-wrap gap-2 justify-content-center justify-content-md-start">
+{{ home.title|default:"Building a Better Future Together" }}
 
-        <a href="{% url 'volunteer' %}"
-           class="btn btn-light btn-lg rounded-pill px-4">
-            🚀 Join Movement
-        </a>
+</h1>
 
-        <a href="https://wa.me/25400670908?text=I%20support%20your%20campaign"
-           class="btn btn-outline-light btn-lg rounded-pill px-4">
-            💬 WhatsApp
-        </a>
 
-        <a href="#news"
-           class="btn btn-warning btn-lg rounded-pill px-4">
-            📰 Updates
-        </a>
 
-    </div>
+<p class="lead mt-3" style="font-size:1.3rem;">
 
-    {% if request.user.is_superuser %}
-    <div class="mt-4">
+{{ home.content|default:"Leadership focused on transparency, opportunity, and real development for every citizen." }}
 
-        <a href="{% url 'edit_page' 'about' %}" class="btn btn-warning">
-    ✏️ Edit About Page
+</p>
+
+
+
+<div class="mt-4 d-flex flex-wrap gap-2 justify-content-center justify-content-md-start">
+
+
+<a href="{% url 'volunteer' %}"
+class="btn btn-light btn-lg rounded-pill px-4">
+
+🚀 Join Movement
+
 </a>
 
-        <a href="{% url 'edit_page' 'home' %}"
-           class="btn btn-success btn-sm me-2">
-            🖼 Change Image
-        </a>
 
-        <form action="{% url 'delete_home_image' %}"
-              method="POST"
-              style="display:inline;">
-            {% csrf_token %}
-            <button class="btn btn-danger btn-sm">
-                🗑 Remove Image
-            </button>
-        </form>
 
-    </div>
-    {% endif %}
+<a href="https://wa.me/25400670908?text=I%20support%20your%20campaign"
+class="btn btn-outline-light btn-lg rounded-pill px-4">
+
+💬 WhatsApp
+
+</a>
+
+
+
+<a href="#news"
+class="btn btn-warning btn-lg rounded-pill px-4">
+
+📰 Updates
+
+</a>
+
+
+
+</div>
+
+
+
+
+
+{% if request.user.is_superuser %}
+
+
+<div class="mt-4">
+
+
+<a href="{% url 'edit_page' 'home' %}"
+class="btn btn-warning">
+
+✏️ Edit Home Page
+
+</a>
+
+
+
+<a href="{% url 'edit_page' 'home' %}"
+class="btn btn-success btn-sm me-2">
+
+🖼 Change Image
+
+</a>
+
+
+
+<form action="{% url 'delete_home_image' %}"
+method="POST"
+style="display:inline;">
+
+
+{% csrf_token %}
+
+
+<button class="btn btn-danger btn-sm">
+
+🗑 Remove Image
+
+</button>
+
+
+</form>
+
+
+
+</div>
+
+
+{% endif %}
+
+
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 
 </div>
 

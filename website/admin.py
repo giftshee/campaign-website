@@ -21,4 +21,24 @@ class VolunteerAdmin(admin.ModelAdmin):
     list_display = ('name', 'phone', 'email', 'status', 'date')
     list_filter = ('status',)
     search_fields = ('name', 'phone', 'email')
-    
+    from django.contrib import admin
+from .models import Gallery
+
+
+@admin.register(Gallery)
+class GalleryAdmin(admin.ModelAdmin):
+
+    list_display = (
+        'title',
+        'created_at'
+    )
+from .models import Manifesto
+
+
+@admin.register(Manifesto)
+class ManifestoAdmin(admin.ModelAdmin):
+
+    list_display = (
+        'title',
+        'created_at'
+    )

@@ -36,9 +36,17 @@ class PageContentForm(forms.ModelForm):
 from .models import Manifesto
 
 class ManifestoForm(forms.ModelForm):
+
     class Meta:
+
         model = Manifesto
-        fields = ['title', 'description', 'video', 'youtube_link']
+
+        fields = [
+            'title',
+            'description',
+            'video',
+            'youtube_link',
+        ]
         from django import forms
 from .models import Gallery
 

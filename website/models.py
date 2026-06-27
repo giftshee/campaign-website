@@ -50,13 +50,37 @@ class Contact(models.Model):
 
 # =========================
 # SINGLE PAGE CMS SYSTEM
-# (THIS REPLACES About + HomeContent + Manifesto)
+# (HOME + ABOUT + OTHER PAGES)
 # =========================
 class PageContent(models.Model):
-    name = models.CharField(max_length=50, unique=True)
-    title = models.CharField(max_length=200)
+
+    name = models.CharField(
+        max_length=50,
+        unique=True
+    )
+
+    title = models.CharField(
+        max_length=200
+    )
+
     content = models.TextField()
-    image = models.ImageField(upload_to="pages/", null=True, blank=True)
+
+
+    # Main page image
+    image = models.ImageField(
+        upload_to="pages/",
+        null=True,
+        blank=True
+    )
+
+
+    # Homepage background image
+    background_image = models.ImageField(
+        upload_to="backgrounds/",
+        null=True,
+        blank=True
+    )
+
 
     def __str__(self):
         return self.name
@@ -74,11 +98,29 @@ class ManifestoItem(models.Model):
     def __str__(self):
         return self.title
 class Manifesto(models.Model):
+
     title = models.CharField(max_length=200)
-    description = models.TextField(blank=True, null=True)
-    video = models.FileField(upload_to='manifesto/', blank=True, null=True)
-    youtube_link = models.URLField(blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+
+    description = models.TextField(
+        blank=True,
+        null=True
+    )
+
+    video = models.FileField(
+        upload_to='manifesto/',
+        blank=True,
+        null=True
+    )
+
+    youtube_link = models.URLField(
+        blank=True,
+        null=True
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
 
     def __str__(self):
         return self.title
@@ -90,10 +132,23 @@ class ContactMessage(models.Model):
 
     def __str__(self):
         return self.name
+from django.db import models
+
+
 class Gallery(models.Model):
-    title = models.CharField(max_length=200, blank=True)
-    image = models.ImageField(upload_to='gallery/')
-    created_at = models.DateTimeField(auto_now_add=True)
+
+    title = models.CharField(
+        max_length=200
+    )
+
+    image = models.ImageField(
+        upload_to="gallery/"
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
 
     def __str__(self):
-        return self.title or "Gallery Image"
+        return self.title
